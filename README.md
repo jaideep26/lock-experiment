@@ -2,7 +2,7 @@
 1. Run script: `./startup.sh`
 2. Double check with NoSQLWorkbench that `LOCK` table was created. If not, re-run.
 
-# Scenarios to test
+# Scenarios to Experiment
 a. Re-election with active instance - DONE
   1. Instance-1 spins up and grabs the lock
   2. Instance-2 spins up and ignores lock because Instance-1 has it
