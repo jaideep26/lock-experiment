@@ -1,4 +1,4 @@
-package com.sidhucodes.lockexperiment.config;
+package com.sidhucodes.lockexperiment.configs;
 
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
