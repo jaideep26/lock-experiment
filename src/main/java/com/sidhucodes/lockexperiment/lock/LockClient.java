@@ -28,7 +28,7 @@ public class LockClient {
     }
 
     public LockItem acquireLock(AcquireLockOptions acquireLockOptions) throws Exception {
-        System.out.println("Acquiring lock");
+        System.err.println("Acquiring lock");
         return this.awsLockClient.acquireLock(acquireLockOptions);
     }
 
@@ -37,7 +37,7 @@ public class LockClient {
     }
 
     public Boolean releaseLock(LockItem lockItem) {
-        System.out.println("Releasing lock");
+        System.err.println("Releasing lock");
         return this.awsLockClient.releaseLock(lockItem);
     }
 

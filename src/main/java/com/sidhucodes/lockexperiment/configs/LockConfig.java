@@ -2,7 +2,6 @@ package com.sidhucodes.lockexperiment.configs;
 
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -18,6 +17,8 @@ import com.amazonaws.services.dynamodbv2.AcquireLockOptions;
 import com.amazonaws.services.dynamodbv2.LockItem;
 import com.google.common.collect.Maps;
 import com.sidhucodes.lockexperiment.lock.LockClient;
+import com.sidhucodes.lockexperiment.utils.LockItemUtil;
+import com.sidhucodes.lockexperiment.utils.TimeUtil;
 
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
@@ -59,13 +60,17 @@ public class LockConfig {
             lock = lockClient().acquireLock(acquireLockOptions());
         } else if (lock.isExpired()) {
             lock.close();
-            ByteBuffer dataByteBuffer = lock.getData().get();
-            String data = dataByteBuffer != null ? StandardCharsets.UTF_8.decode(dataByteBuffer).toString() : null;
-            LocalDateTime lastHeartbeat = LocalDateTime.parse(data);
-            Duration duration = Duration.between(lastHeartbeat, LocalDateTime.now());
-            if (duration.getSeconds() > leaseDuration * 2) {
-                System.err.println("Need to force re-election");
-                lock = lockClient().acquireLock(forceAcquireLockOptions(LocalDateTime.now().toString()));
+
+            String data = LockItemUtil.getData(lock);
+
+            if (data == null) {
+                System.err.println("ERROR: Data was null, but should not be");
+            } else {
+                Duration duration = TimeUtil.getDurationSinceNow(TimeUtil.getLocalDateTime(data));
+                if (duration.getSeconds() > leaseDuration * 2) {
+                    System.err.println("Need to force re-election");
+                    lock = lockClient().acquireLock(forceAcquireLockOptions(LocalDateTime.now().toString()));
+                }
             }
 
         } else {

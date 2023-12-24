@@ -56,7 +56,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>31.0-jre</version> <!-- Use the latest version available -->
+			<version>33.0.0-jre</version>
 		</dependency>
 
 	</dependencies>

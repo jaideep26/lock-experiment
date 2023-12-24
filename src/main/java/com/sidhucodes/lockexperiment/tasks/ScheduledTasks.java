@@ -19,9 +19,9 @@ public class ScheduledTasks {
         LockItem lock = lockClient.getLock("Scheduler");
 
         if (lock != null && !lock.isExpired()) {
-            System.err.println("Executing job.");
+            System.out.println("Executing job.");
         } else {
-            System.err.println("Skipping");
+            System.out.println("Skipping");
         }
     }
 }
