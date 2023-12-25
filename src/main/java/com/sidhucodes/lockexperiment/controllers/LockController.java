@@ -68,7 +68,6 @@ public class LockController {
         if (ConnectivityUtil.checkConnectivity(request.getAddress())) {
             System.err.println("Able to connect");
 
-            System.err.println("Removing myself as lock owner.");
             LockItem lock = lockClient.getLock(request.getPartitionKey());
             if (lock != null && !lock.isExpired()) {
                 lockClient.releaseLock(lock);
