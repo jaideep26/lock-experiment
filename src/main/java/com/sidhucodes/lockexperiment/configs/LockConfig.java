@@ -97,7 +97,8 @@ public class LockConfig {
 
     }
 
-    private Map<String, AttributeValue> additionalAttributes() throws Exception {
+    @Bean
+    Map<String, AttributeValue> additionalAttributes() throws Exception {
         Map<String, AttributeValue> additionalAttributes = Maps.newHashMap();
         additionalAttributes.put("region", AttributeValue.builder().s(lockRegion).build());
         additionalAttributes.put("createdOn", AttributeValue.builder().s(LocalDateTime.now().toString()).build());

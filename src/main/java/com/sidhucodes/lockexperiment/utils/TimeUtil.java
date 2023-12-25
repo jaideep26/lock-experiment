@@ -12,4 +12,8 @@ public class TimeUtil {
     public static Duration getDurationSinceNow(LocalDateTime localDateTime) {
         return Duration.between(localDateTime, LocalDateTime.now());
     }
+
+    public static String now() {
+        return LocalDateTime.now().toString();
+    }
 }
