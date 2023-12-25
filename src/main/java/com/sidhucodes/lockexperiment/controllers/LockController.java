@@ -66,8 +66,6 @@ public class LockController {
 
         System.err.print("Checking availability of new lock owner... ");
         if (ConnectivityUtil.checkConnectivity(request.getAddress())) {
-            System.err.println("Able to connect");
-
             LockItem lock = lockClient.getLock(request.getPartitionKey());
             if (lock != null && !lock.isExpired()) {
                 lockClient.releaseLock(lock);
@@ -80,7 +78,9 @@ public class LockController {
             }
 
         }
-
+        else {
+            System.err.println("Able to connect");
+        }
         return success;
     }
 
