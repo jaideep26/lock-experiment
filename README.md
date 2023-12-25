@@ -15,7 +15,7 @@ b. Re-election on startup - DONE
   3. Wait for 30 seconds
   4. Re-start Instance 1, should re-elect itself and continue executing tasks
 
-c. Switching lock holders - IN PROGRESS
+c. Switching lock holders - DONE
   1. Instance-1 spins up and grabs lock
   2. Instance-2 spins up and ignores lock because Instance-1 has it
   3. Send request to "leader switching" endpoint, specifying Instance-2 as new leader
