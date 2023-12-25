@@ -89,7 +89,7 @@ public class LockController {
 
         String response = null;
         try {
-            lockClient.acquireLock(AcquireLockOptions.builder("Scheduler")//
+            lockClient.acquireLock(AcquireLockOptions.builder(partitionKey)//
                     .withAdditionalAttributes(additionalAttributes)//
                     .withData(ByteBuffer.wrap(TimeUtil.now().getBytes()))//
                     .withReplaceData(true)//
